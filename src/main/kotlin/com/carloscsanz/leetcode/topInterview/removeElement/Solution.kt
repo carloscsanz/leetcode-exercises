@@ -11,22 +11,25 @@ object Solution {
         var backIndex = nums.size - 1
         var count = 0
 
-        while (frontIndex < nums.size) {
-            val frontValue = nums[frontIndex]
-            val backValue = nums[backIndex]
-
-            if (frontValue == `val`) {
-                if (backValue != `val`) {
+        while (frontIndex <= backIndex) {
+            if (nums[frontIndex] == `val`) {
+                if (nums[backIndex] == `val`) {
+                    backIndex--
+                    count++
+                } else {
                     nums[frontIndex++] = nums[backIndex]
                     nums[backIndex--] = `val`
                     count++
-                } else {
+                }
+            } else {
+                frontIndex++
+                if (nums[backIndex] == `val`) {
                     backIndex--
                     count++
                 }
             }
         }
 
-        return count
+        return nums.size - count
     }
 }
